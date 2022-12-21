@@ -6,20 +6,17 @@ namespace ShopAPI.Features.RequestHandling.PipelineBehaviour;
 
 /// <inheritdoc />
 public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TResponse : class where TRequest : MediatR.IRequest<TResponse>
+    where TResponse : class
 {
     private readonly IValidator<TRequest> _compositeValidator;
 
-    /// <summary>
-    /// </summary>
-    /// <param name="compositeValidator"></param>
     public ValidationPipelineBehavior(IValidator<TRequest> compositeValidator)
     {
         _compositeValidator = compositeValidator;
     }
 
-    /// <inheritdoc />
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
+    public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken,
+        RequestHandlerDelegate<TResponse> next)
     {
         var result = await _compositeValidator.ValidateAsync(request, cancellationToken);
 
@@ -32,7 +29,7 @@ public class ValidationPipelineBehavior<TRequest, TResponse> : IPipelineBehavior
 
         var response =
             Response.BadRequest(
-                typedRequest.Id,
+                typedRequest.Id, 
                 new ApplicationException("Validation error"),
                 result.Errors
                     .DistinctBy(x => x.PropertyName)

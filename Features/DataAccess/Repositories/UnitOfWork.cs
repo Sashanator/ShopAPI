@@ -1,5 +1,4 @@
-﻿using ShopAPI.Features.DataAccess.Models;
-using ShopAPI.Features.DataAccess.Repositories.DeliveryRepository;
+﻿using ShopAPI.Features.DataAccess.Repositories.DeliveryRepository;
 using ShopAPI.Features.DataAccess.Repositories.NotificationsRepository;
 using ShopAPI.Features.DataAccess.Repositories.OrdersRepository;
 using ShopAPI.Features.DataAccess.Repositories.PaymentsRepository;

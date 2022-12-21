@@ -1,17 +1,18 @@
 ﻿using FluentValidation;
 using MediatR;
+using MediatR.Registration;
 using ShopAPI.Features.RequestHandling.PipelineBehaviour;
 using ShopAPI.Features.RequestHandling.Validation.Validators;
 
 namespace ShopAPI.Features.RequestHandling.Validation;
 
 /// <summary>
-///     Validation services extension
+///     Validation service collections
 /// </summary>
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    ///     Add validation for requests
+    ///     Add dependencies for validators
     /// </summary>
     /// <param name="services"></param>
     /// <returns></returns>
@@ -24,7 +25,7 @@ public static class ServiceCollectionExtensions
             .FromCallingAssembly()
             .AddClasses(classes => classes.AssignableTo(typeof(IValidator<>)))
             .As(type => type.GetInterfaces()
-                .Where(i => i.IsGenericType && !i.IsGenericTypeDefinition && i.GetGenericTypeDefinition() == typeof(IValidator<>)))
+                .Where(i => i.IsGenericType && !i.IsOpenGeneric() && i.GetGenericTypeDefinition() == typeof(IValidator<>)))
             .AsMatchingInterface()
             .WithTransientLifetime());
 

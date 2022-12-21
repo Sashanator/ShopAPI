@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.OpenApi.Models;
 using ShopAPI.Features;
 using ShopAPI.Features.DataAccess;
-using ShopAPI.Features.Startup;
+using ShopAPI.Features.RequestHandling.Validation;
 
 namespace ShopAPI;
 
@@ -23,6 +23,7 @@ public class Program
         services
             .AddShopServiceDbContext()
             .AddInternalServiceCollection()
+            .AddValidationDependencies()
             .AddShopServiceEntityFrameworkRepositories();
         
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
