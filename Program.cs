@@ -1,6 +1,5 @@
 using System.Reflection;
 using MediatR;
-using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using ShopAPI.Features.DataAccess;
 using ShopAPI.Features.Startup;
 
