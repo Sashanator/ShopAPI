@@ -79,6 +79,8 @@ public class ShopDbContext : DbContext
 
         modelBuilder.HasPostgresExtension("hstore");
 
+        // TODO: Seed some data to DB
+
         // Seed data
 
         //modelBuilder.Entity<TestEntity>().HasData(new List<TestEntity>

@@ -70,7 +70,7 @@ public static class StartupServicesExtensions
         app.UseCors("AllowAll");
 
         app.UseRouting();
-        
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
