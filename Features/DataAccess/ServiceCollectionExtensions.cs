@@ -54,8 +54,7 @@ namespace ShopAPI.Features.DataAccess
             services.AddScoped<IOrdersRepository, OrdersRepository>();
             services.AddScoped<IPaymentRepository, PaymentRepository>();
             services.AddScoped<IProductsRepository, ProductsRepository>();
-
-            //services.AddScoped<ITestEntitiesRepository, TestEntitiesRepository>();
+            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

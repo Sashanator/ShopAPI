@@ -1,5 +1,6 @@
 using System.Reflection;
 using MediatR;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using ShopAPI.Features.DataAccess;
 using ShopAPI.Features.Startup;
 
@@ -10,18 +11,25 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        var services = builder.Services;
 
         // Add services to the container.
-        builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
-        builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-        builder.Services.AddControllers();
-        builder.Services
+        services.AddMediatR(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddControllers();
+        services.AddHttpContextAccessor();
+        services.AddApiVersioning();
+        services
             .AddShopServiceDbContext()
             .AddShopServiceEntityFrameworkRepositories();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerConfiguration();
+        services.AddEndpointsApiExplorer();
 
+        services.AddSwaggerGen(o =>
+        {
+            
+        });
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -32,8 +40,6 @@ public class Program
         }
 
         app.UseHttpsRedirection();
-
-        app.UseAuthorization();
 
         app.UseMicroservice();
 
