@@ -4,7 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopAPI.Features.DataAccess.Models;
+using ShopAPI.Features.Deliveries.Model;
+using ShopAPI.Features.Notifications.Model;
+using ShopAPI.Features.Orders.Model;
+using ShopAPI.Features.Payments.Model;
+using ShopAPI.Features.Products.Model;
 
 namespace ShopAPI.Features.DataAccess;
 
@@ -17,25 +23,44 @@ public class ShopDbContext : DbContext
 
     // Add DbSet of entities here
 
-    /// <summary>
-    ///     Test entities for context
-    /// </summary>
-    public DbSet<TestEntity> TestEntities { get; set; }
+    public DbSet<Delivery> Deliveries { get; set; }
+
+    public DbSet<Notification> Notifications { get; set; }
+
+    public DbSet<Order> Orders { get; set; }
+
+    public DbSet<Payment> Payments { get; set; }
+
+    public DbSet<Product> Products { get; set; }
 
     /// <inheritdoc />
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        #region Examples
-
         //Enum to string converter
 
-        //var converter = new ValueConverter<EnyEnum?, string>(
-        //    v => v != null ? v.ToString() : null,
-        //    v => v != null ? (EnyEnum?)Enum.Parse(typeof(EnyEnum), v) : null);
+        var orderStatusConverter = new ValueConverter<OrderStatus?, string>(
+            v => v != null ? v.ToString() : null,
+            v => v != null ? (OrderStatus?)Enum.Parse(typeof(OrderStatus), v) : null);
 
-        //modelBuilder.Entity<AnyEntity>()
-        //    .Property(j => j.AnyEnum)
-        //    .HasConversion(converter); 
+        var deliveryStatusConverter = new ValueConverter<DeliveryStatus?, string>(
+            v => v != null ? v.ToString() : null,
+            v => v != null ? (DeliveryStatus?)Enum.Parse(typeof(DeliveryStatus), v) : null);
+
+        var paymentStatusConverter = new ValueConverter<PaymentStatus?, string>(
+            v => v != null ? v.ToString() : null,
+            v => v != null ? (PaymentStatus?)Enum.Parse(typeof(PaymentStatus), v) : null);
+
+        modelBuilder.Entity<Order>()
+            .Property(j => j.Status)
+            .HasConversion(orderStatusConverter);
+
+        modelBuilder.Entity<Delivery>()
+            .Property(j => j.Status)
+            .HasConversion(deliveryStatusConverter);
+
+        modelBuilder.Entity<Payment>()
+            .Property(j => j.Status)
+            .HasConversion(paymentStatusConverter);
 
 
         //One to Many relations
@@ -51,8 +76,6 @@ public class ShopDbContext : DbContext
         //modelBuilder.Entity<AnyEntity>()
         //    .HasIndex(i => i.AnyProperty)
         //    .HasName("IX_EntityName_PropertyName");
-
-        #endregion
 
         modelBuilder.HasPostgresExtension("hstore");
 

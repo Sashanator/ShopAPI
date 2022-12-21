@@ -1,7 +1,7 @@
 using System.Reflection;
 using MediatR;
 using ShopAPI.Features.DataAccess;
-using ShopAPI.Features.RequestHandling.Validation;
+using ShopAPI.Features.Startup;
 
 namespace ShopAPI;
 
@@ -15,13 +15,12 @@ public class Program
         builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
         builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
         builder.Services.AddControllers();
-        builder.Services.AddValidationDependencies();
         builder.Services
             .AddShopServiceDbContext()
             .AddShopServiceEntityFrameworkRepositories();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwaggerGen();
+        builder.Services.AddSwaggerConfiguration();
 
         var app = builder.Build();
 
@@ -36,6 +35,7 @@ public class Program
 
         app.UseAuthorization();
 
+        app.UseMicroservice();
 
         app.MapControllers();
 

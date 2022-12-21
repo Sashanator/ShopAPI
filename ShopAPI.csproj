@@ -13,6 +13,7 @@
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.12" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,6 +25,32 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Features\Orders\RequestHandling\Dto\" />
+    <Folder Include="Features\Orders\RequestHandling\Handlers\" />
+    <Folder Include="Features\Orders\RequestHandling\Requests\" />
+    <Folder Include="Features\Orders\RequestHandling\Validators\" />
+    <Folder Include="Features\Orders\Services\" />
+    <Folder Include="Features\Deliveries\RequestHandling\Dto\" />
+    <Folder Include="Features\Deliveries\RequestHandling\Handlers\" />
+    <Folder Include="Features\Deliveries\RequestHandling\Requests\" />
+    <Folder Include="Features\Deliveries\RequestHandling\Validators\" />
+    <Folder Include="Features\Deliveries\Services\" />
+    <Folder Include="Features\Payments\RequestHandling\Dto\" />
+    <Folder Include="Features\Payments\RequestHandling\Handlers\" />
+    <Folder Include="Features\Payments\RequestHandling\Requests\" />
+    <Folder Include="Features\Payments\RequestHandling\Validators\" />
+    <Folder Include="Features\Payments\Services\" />
+    <Folder Include="Features\Notifications\RequestHandling\Dto\" />
+    <Folder Include="Features\Notifications\RequestHandling\Handlers\" />
+    <Folder Include="Features\Notifications\RequestHandling\Requests\" />
+    <Folder Include="Features\Notifications\RequestHandling\Validators\" />
+    <Folder Include="Features\Notifications\Services\" />
+    <Folder Include="Features\Products\RequestHandling\Dto\" />
+    <Folder Include="Features\Products\RequestHandling\Handlers\" />
+    <Folder Include="Features\Products\RequestHandling\Requests\" />
+    <Folder Include="Features\Products\RequestHandling\Validators\" />
+    <Folder Include="Features\Products\Services\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

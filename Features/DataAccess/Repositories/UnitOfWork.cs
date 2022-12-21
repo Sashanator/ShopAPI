@@ -1,4 +1,9 @@
 ﻿using ShopAPI.Features.DataAccess.Models;
+using ShopAPI.Features.DataAccess.Repositories.DeliveryRepository;
+using ShopAPI.Features.DataAccess.Repositories.NotificationsRepository;
+using ShopAPI.Features.DataAccess.Repositories.OrdersRepository;
+using ShopAPI.Features.DataAccess.Repositories.PaymentsRepository;
+using ShopAPI.Features.DataAccess.Repositories.ProductsRepository;
 
 namespace ShopAPI.Features.DataAccess.Repositories;
 
@@ -10,14 +15,34 @@ public class UnitOfWork : IUnitOfWork
     ///     Constructor
     /// </summary>
     /// <param name="serviceDbContext"></param>
-    public UnitOfWork(ShopDbContext serviceDbContext)
+    /// <param name="deliveryRepository"></param>
+    /// <param name="notificationsRepository"></param>
+    /// <param name="ordersRepository"></param>
+    /// <param name="paymentsRepository"></param>
+    /// <param name="productRepository"></param>
+    public UnitOfWork(
+        ShopDbContext serviceDbContext, 
+        IDeliveryRepository deliveryRepository, 
+        INotificationsRepository notificationsRepository, 
+        IOrdersRepository ordersRepository, 
+        IPaymentRepository paymentsRepository, 
+        IProductsRepository productRepository)
     {
         _serviceDbContext = serviceDbContext;
-
-        // DI for repos (interfaces!!!)
+        DeliveryRepository = deliveryRepository;
+        NotificationsRepository = notificationsRepository;
+        OrdersRepository = ordersRepository;
+        PaymentsRepository = paymentsRepository;
+        ProductRepository = productRepository;
 
         // TestEntitiesRepository = testEntitiesRepository;
     }
+
+    public IDeliveryRepository DeliveryRepository { get; }
+    public INotificationsRepository NotificationsRepository { get; }
+    public IOrdersRepository OrdersRepository { get; }
+    public IPaymentRepository PaymentsRepository { get; }
+    public IProductsRepository ProductRepository { get; }
 
     public int SaveChanges()
     {

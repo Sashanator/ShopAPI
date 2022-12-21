@@ -1,5 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopAPI.Features.DataAccess.Repositories;
+using ShopAPI.Features.DataAccess.Repositories.DeliveryRepository;
+using ShopAPI.Features.DataAccess.Repositories.NotificationsRepository;
+using ShopAPI.Features.DataAccess.Repositories.OrdersRepository;
+using ShopAPI.Features.DataAccess.Repositories.PaymentsRepository;
+using ShopAPI.Features.DataAccess.Repositories.ProductsRepository;
 
 namespace ShopAPI.Features.DataAccess
 {
@@ -43,6 +48,12 @@ namespace ShopAPI.Features.DataAccess
         public static IServiceCollection AddShopServiceEntityFrameworkRepositories(this IServiceCollection services)
         {
             // Add DI here for repos
+
+            services.AddScoped<IDeliveryRepository, DeliveryRepository>();
+            services.AddScoped<INotificationsRepository, NotificationsRepository>();
+            services.AddScoped<IOrdersRepository, OrdersRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IProductsRepository, ProductsRepository>();
 
             //services.AddScoped<ITestEntitiesRepository, TestEntitiesRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
