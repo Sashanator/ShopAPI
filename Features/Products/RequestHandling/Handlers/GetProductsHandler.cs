@@ -7,8 +7,8 @@ namespace ShopAPI.Features.Products.RequestHandling.Handlers;
 
 public class GetProductsHandler : IRequestHandler<GetProductsRequest, Response>
 {
-    private readonly IPaymentService _productService;
-    public GetProductsHandler(IPaymentService productService)
+    private readonly IProductService _productService;
+    public GetProductsHandler(IProductService productService)
     {
         _productService = productService;
     }

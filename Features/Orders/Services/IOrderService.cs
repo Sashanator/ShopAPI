@@ -2,6 +2,7 @@
 using ShopAPI.Features.Common;
 using ShopAPI.Features.Orders.Model;
 using ShopAPI.Features.Orders.RequestHandling.Dto;
+using ShopAPI.Features.Products.RequestHandling.Dto;
 
 namespace ShopAPI.Features.Orders.Services;
 
@@ -16,4 +17,6 @@ public interface IOrderService
     Task<PagedResult<Order>> GetOrders(PaginationDto dto, CancellationToken cancellationToken);
 
     Task DeleteOrderById(Guid id, CancellationToken cancellationToken);
+
+    Task AddProductsToOrder(Guid orderId, List<CreateProductDto> products, CancellationToken cancellationToken);
 }

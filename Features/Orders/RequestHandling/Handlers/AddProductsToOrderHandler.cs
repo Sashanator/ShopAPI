@@ -10,20 +10,20 @@ using ShopAPI.Features.RequestHandling.Base;
 
 namespace ShopAPI.Features.Orders.RequestHandling.Handlers
 {
-    public class GetOrderByIdHandler : IRequestHandler<GetOrderByIdRequest, Response>
+    public class AddProductsToOrderHandler : IRequestHandler<AddProductsToOrderRequest, Response>
     {
         private readonly IOrderService _orderService;
-        public GetOrderByIdHandler(IOrderService orderService)
+        public AddProductsToOrderHandler(IOrderService orderService)
         {
             _orderService = orderService;
         }
 
-        public async Task<Response> Handle(GetOrderByIdRequest request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(AddProductsToOrderRequest request, CancellationToken cancellationToken)
         {
             try
             {
-                var result = await _orderService.GetOrderById(request.OrderId, cancellationToken);
-                return Response.Ok(request.Id, result);
+                await _orderService.AddProductsToOrder(request.OrderId, request.Products, cancellationToken);
+                return Response.Ok(request.Id);
             }
             catch (Exception e)
             {

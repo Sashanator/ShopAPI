@@ -6,6 +6,7 @@ using ShopAPI.Features.DataAccess.Repositories;
 using ShopAPI.Features.Orders.Model;
 using ShopAPI.Features.Orders.RequestHandling.Dto;
 using ShopAPI.Features.Products.Model;
+using ShopAPI.Features.Products.RequestHandling.Dto;
 
 namespace ShopAPI.Features.Orders.Services;
 
@@ -56,6 +57,15 @@ public class OrderService : IOrderService
     public async Task DeleteOrderById(Guid id, CancellationToken cancellationToken)
     {
         await _unitOfWork.OrdersRepository.DeleteAsync(id);
+        await _unitOfWork.SaveChangesAsync();
+    }
+
+    public async Task AddProductsToOrder(Guid orderId, List<CreateProductDto> productsDto, CancellationToken cancellationToken)
+    {
+        var order = await _unitOfWork.OrdersRepository.GetByIdWithTrackingAsync(orderId);
+        var products = _mapper.Map<List<Product>>(productsDto);
+        order!.Products = products;
+        await _unitOfWork.OrdersRepository.UpdateAsync(order);
         await _unitOfWork.SaveChangesAsync();
     }
 }

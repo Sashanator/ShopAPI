@@ -28,7 +28,7 @@ public class ProductsController : BaseApiController
     /// <returns></returns>
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> CreateProduct([FromBody] CreatePaymentDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto dto, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new CreateProductRequest(dto), cancellationToken);
         return result.AsAspNetCoreResult();
@@ -56,7 +56,7 @@ public class ProductsController : BaseApiController
     /// <returns></returns>
     [HttpPut]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdateProduct([FromBody] UpdatePaymentDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> UpdateProduct([FromBody] UpdateProductDto dto, CancellationToken cancellationToken)
     {
         var result = await _mediator.Send(new UpdateProductRequest(dto), cancellationToken);
         return result.AsAspNetCoreResult();

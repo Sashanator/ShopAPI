@@ -7,8 +7,12 @@ using ShopAPI.Features.RequestHandling.Base;
 
 namespace ShopAPI.Features.Orders.RequestHandling.Requests
 {
-    public class GetOderByIdRequest : Request<Response>
+    public class GetOrderByIdRequest : Request<Response>
     {
+        public GetOrderByIdRequest(Guid orderId)
+        {
+            OrderId = orderId;
+        }
         public Guid OrderId { get; set; }
     }
 }

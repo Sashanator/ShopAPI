@@ -8,8 +8,8 @@ namespace ShopAPI.Features.Products.RequestHandling.Handlers;
 /// <inheritdoc />
 public class DeleteProductByIdHandler : IRequestHandler<DeleteProductByIdRequest, Response>
 {
-    private readonly IPaymentService _productService;
-    public DeleteProductByIdHandler(IPaymentService productService)
+    private readonly IProductService _productService;
+    public DeleteProductByIdHandler(IProductService productService)
     {
         _productService = productService;
     }
