@@ -2,6 +2,7 @@
 using ShopAPI.Features.DataAccess.Repositories;
 using ShopAPI.Features.Deliveries.Model;
 using ShopAPI.Features.Deliveries.RequestHandling.Dto;
+using ShopAPI.Features.Orders.Model;
 
 namespace ShopAPI.Features.Deliveries.Services
 {
@@ -9,10 +10,24 @@ namespace ShopAPI.Features.Deliveries.Services
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+
+        private delegate Task DeliveryHandler(Guid orderId);
+
+        private event DeliveryHandler? Notify;
+
+        private async Task FinishOrder(Guid orderId)
+        {
+            var order = await _unitOfWork.OrdersRepository.GetByIdWithTrackingAsync(orderId);
+            order.Status = OrderStatus.Finished;
+            await _unitOfWork.OrdersRepository.UpdateAsync(order);
+            await _unitOfWork.SaveChangesAsync();
+        }
+
         public DeliveryService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
+            Notify += FinishOrder;
         }
 
         public async Task CreateDelivery(CreateDeliveryDto dto, CancellationToken cancellationToken)
