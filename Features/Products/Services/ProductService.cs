@@ -59,8 +59,8 @@ public class ProductService : IProductService
     /// <inheritdoc />
     public async Task<PagedResult<Product>> GetProducts(PaginationDto dto, CancellationToken cancellationToken)
     {
-        var products = await _unitOfWork.ProductRepository.SearchAsync(p => p.Count > 0, "CreatedAt",
-            SortDirection.Desc, dto.PageIndex * dto.PageSize, dto.PageSize);
+        var products = await _unitOfWork.ProductRepository.GetPagedAsync(dto.PageIndex * dto.PageSize, dto.PageSize,
+            "CreatedAt", SortDirection.Desc);
         var totalCount = await _unitOfWork.ProductRepository.CountAllAsync();
         return new PagedResult<Product>
         {

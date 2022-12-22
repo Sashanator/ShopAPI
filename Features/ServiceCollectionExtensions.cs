@@ -11,7 +11,7 @@ public static class ServiceCollectionExtensions
     /// <returns></returns>
     public static IServiceCollection AddInternalServiceCollection(this IServiceCollection services)
     {
-        services.AddTransient<IProductService, ProductService>();
+        services.AddTransient<IPaymentService, PaymentService>();
 
         return services;
     }
