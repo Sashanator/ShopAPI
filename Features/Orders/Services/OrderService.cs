@@ -60,11 +60,12 @@ public class OrderService : IOrderService
         await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task AddProductsToOrder(Guid orderId, List<Guid> productsIds, CancellationToken cancellationToken)
+    public async Task AddProductsToOrder(Guid orderId, List<ProductsDto> products, CancellationToken cancellationToken)
     {
         var order = await _unitOfWork.OrdersRepository.GetByIdWithTrackingAsync(orderId);
-        var products = await _unitOfWork.ProductRepository.GetByIdsAsync(productsIds);
-        foreach (var product in products)
+        var productIds = products.Select(p => p.ProductId).ToList();
+        var orderProducts = await _unitOfWork.ProductRepository.GetByIdsAsync(productIds);
+        foreach (var product in orderProducts)
         {
             order.Products.Add(product);
         }

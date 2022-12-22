@@ -45,10 +45,10 @@ public class OrdersController : BaseApiController
     /// <returns></returns>
     [HttpPost("{id:guid}/add-products")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> AddProductsToOrder(Guid id, [FromBody] List<Guid> productIds,
+    public async Task<IActionResult> AddProductsToOrder(Guid id, [FromBody] List<ProductsDto> products,
         CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new AddProductsToOrderRequest(productIds, id));
+        var result = await _mediator.Send(new AddProductsToOrderRequest(products, id), cancellationToken);
         return result.AsAspNetCoreResult();
     }
 
