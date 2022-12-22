@@ -32,7 +32,7 @@ public class Program
         {
             c.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Ssorin Shop API",
+                Title = "SsorinDikovitskiy Shop API",
                 Version = "v1",
                 Description = "It's shop API for my subject Software Design"
             });
