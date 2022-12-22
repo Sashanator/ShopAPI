@@ -13,5 +13,5 @@ public class Product : BaseEntity
 
     public long Count { get; set; }
 
-    public ICollection<Order> Orders { get; set; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

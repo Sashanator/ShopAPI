@@ -48,18 +48,16 @@ public class PaymentsController : BaseApiController
     }
 
     /// <summary>
-    ///     Updates payment's status
+    ///     Completes payment
     /// </summary>
     /// <param name="id"></param>
-    /// <param name="status"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpPost("{id:guid}/update-status")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> UpdatePaymentStatus(Guid id, [FromQuery] PaymentStatus status,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> CompletePayment(Guid id, CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new UpdatePaymentStatusRequest(id, status), cancellationToken);
+        var result = await _mediator.Send(new UpdatePaymentStatusRequest(id), cancellationToken);
         return result.AsAspNetCoreResult();
     }
 }

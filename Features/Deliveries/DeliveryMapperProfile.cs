@@ -11,7 +11,7 @@ namespace ShopAPI.Features.Deliveries
 {
     public class DeliveryMapperProfile : Profile
     {
-        protected DeliveryMapperProfile()
+        public DeliveryMapperProfile()
         {
             CreateMap<CreateDeliveryDto, Delivery>();
         }

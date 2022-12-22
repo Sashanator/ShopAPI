@@ -17,8 +17,8 @@ public class Program
         // Add services to the container.
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         services.AddControllers();
-        services.AddMediatR(Assembly.GetExecutingAssembly());
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         services.AddHttpContextAccessor();
         services
             .AddShopServiceDbContext()

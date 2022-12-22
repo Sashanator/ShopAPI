@@ -60,11 +60,14 @@ public class OrderService : IOrderService
         await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task AddProductsToOrder(Guid orderId, List<CreateProductDto> productsDto, CancellationToken cancellationToken)
+    public async Task AddProductsToOrder(Guid orderId, List<Guid> productsIds, CancellationToken cancellationToken)
     {
         var order = await _unitOfWork.OrdersRepository.GetByIdWithTrackingAsync(orderId);
-        var products = _mapper.Map<List<Product>>(productsDto);
-        order!.Products = products;
+        var products = await _unitOfWork.ProductRepository.GetByIdsAsync(productsIds);
+        foreach (var product in products)
+        {
+            order.Products.Add(product);
+        }
         await _unitOfWork.OrdersRepository.UpdateAsync(order);
         await _unitOfWork.SaveChangesAsync();
     }

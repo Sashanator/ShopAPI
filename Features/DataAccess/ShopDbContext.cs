@@ -57,6 +57,9 @@ public class ShopDbContext : DbContext
             .Property(j => j.Status)
             .HasConversion(paymentStatusConverter);
 
+        modelBuilder.Entity<Order>()
+            .HasMany(o => o.Products)
+            .WithMany(p => p.Orders);
 
         //One to Many relations
 

@@ -10,13 +10,10 @@ namespace ShopAPI.Features.Payments.RequestHandling.Requests
 {
     public class UpdatePaymentStatusRequest : Request<Response>
     {
-        public UpdatePaymentStatusRequest(Guid paymentId, PaymentStatus status)
+        public UpdatePaymentStatusRequest(Guid paymentId)
         {
             PaymentId = paymentId;
-            Status = status;
         }
         public Guid PaymentId { get; set; }
-
-        public PaymentStatus Status { get; set; }
     }
 }

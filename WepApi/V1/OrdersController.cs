@@ -40,15 +40,15 @@ public class OrdersController : BaseApiController
     ///     Adds products to order
     /// </summary>
     /// <param name="id"></param>
-    /// <param name="products"></param>
+    /// <param name="productIds"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
     [HttpPost("{id:guid}/add-products")]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> AddProductsToOrder(Guid id, [FromBody] List<CreateProductDto> products,
+    public async Task<IActionResult> AddProductsToOrder(Guid id, [FromBody] List<Guid> productIds,
         CancellationToken cancellationToken)
     {
-        var result = await _mediator.Send(new AddProductsToOrderRequest(products, id));
+        var result = await _mediator.Send(new AddProductsToOrderRequest(productIds, id));
         return result.AsAspNetCoreResult();
     }
 

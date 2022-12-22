@@ -22,7 +22,7 @@ namespace ShopAPI.Features.Orders.RequestHandling.Handlers
         {
             try
             {
-                await _orderService.AddProductsToOrder(request.OrderId, request.Products, cancellationToken);
+                await _orderService.AddProductsToOrder(request.OrderId, request.ProductIds, cancellationToken);
                 return Response.Ok(request.Id);
             }
             catch (Exception e)

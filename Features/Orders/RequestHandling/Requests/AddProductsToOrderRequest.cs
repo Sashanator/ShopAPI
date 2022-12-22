@@ -10,12 +10,12 @@ namespace ShopAPI.Features.Orders.RequestHandling.Requests
 {
     public class AddProductsToOrderRequest : Request<Response>
     {
-        public AddProductsToOrderRequest(List<CreateProductDto> products, Guid orderId)
+        public AddProductsToOrderRequest(List<Guid> products, Guid orderId)
         {
-            Products = products;
+            ProductIds = products;
             OrderId = orderId;
         }
-        public List<CreateProductDto> Products { get; set; }
+        public List<Guid> ProductIds { get; set; }
 
         public Guid OrderId { get; set; }
     }

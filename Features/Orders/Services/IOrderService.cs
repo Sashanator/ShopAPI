@@ -18,5 +18,5 @@ public interface IOrderService
 
     Task DeleteOrderById(Guid id, CancellationToken cancellationToken);
 
-    Task AddProductsToOrder(Guid orderId, List<CreateProductDto> products, CancellationToken cancellationToken);
+    Task AddProductsToOrder(Guid orderId, List<Guid> productIds, CancellationToken cancellationToken);
 }

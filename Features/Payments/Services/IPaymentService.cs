@@ -12,7 +12,7 @@ namespace ShopAPI.Features.Payments.Services
     {
         Task CreatePayment(CreatePaymentDto dto, CancellationToken cancellationToken);
 
-        Task UpdatePaymentStatus(Guid paymentId, PaymentStatus status);
+        Task CompletePayment(Guid paymentId, CancellationToken cancellationToken);
 
         Task<Payment> GetPaymentById(Guid paymentId, CancellationToken cancellationToken);
     }

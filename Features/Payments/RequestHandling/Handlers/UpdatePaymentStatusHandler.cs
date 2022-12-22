@@ -22,7 +22,7 @@ namespace ShopAPI.Features.Payments.RequestHandling.Handlers
         {
             try
             {
-                await _paymentService.UpdatePaymentStatus(request.PaymentId, request.Status);
+                await _paymentService.CompletePayment(request.PaymentId, cancellationToken);
                 return Response.Ok(request.Id);
             }
             catch (Exception e)

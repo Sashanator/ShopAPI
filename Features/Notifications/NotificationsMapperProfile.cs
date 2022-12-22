@@ -11,7 +11,7 @@ namespace ShopAPI.Features.Notifications
 {
     public class NotificationsMapperProfile : Profile
     {
-        protected NotificationsMapperProfile()
+        public NotificationsMapperProfile()
         {
             CreateMap<CreateNotificationDto, Notification>();
         }
