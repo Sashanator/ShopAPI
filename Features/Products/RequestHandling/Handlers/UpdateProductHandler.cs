@@ -7,8 +7,8 @@ namespace ShopAPI.Features.Products.RequestHandling.Handlers;
 
 public class UpdateProductHandler : IRequestHandler<UpdateProductRequest, Response>
 {
-    private readonly IProductService _productService;
-    public UpdateProductHandler(IProductService productService)
+    private readonly IPaymentService _productService;
+    public UpdateProductHandler(IPaymentService productService)
     {
         _productService = productService;
     }
